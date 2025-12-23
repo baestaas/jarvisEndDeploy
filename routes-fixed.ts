@@ -1,38 +1,30 @@
-import express from "express";
+import { Router } from "express";
 import OpenAI from "openai";
 
-const router = express.Router();
+const router = Router();
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-// ===== IMAGE GENERATION (INLINE, БЕЗ ИМПОРТОВ) =====
-async function generateImage(prompt: string): Promise<string> {
-  const result = await openai.images.generate({
-    model: "gpt-image-1",
-    prompt,
-    size: "1024x1024",
-  });
-
-  return result.data[0].url;
-}
-
-// ===== ROUTES =====
-router.post("/generate-image", async (req, res) => {
+router.post("/chat", async (req, res) => {
   try {
-    const { prompt } = req.body;
+    const apiKey = process.env.OPENAI_API_KEY;
 
-    if (!prompt) {
-      return res.status(400).json({ error: "Prompt is required" });
+    if (!apiKey) {
+      return res.status(500).json({
+        error: "OPENAI_API_KEY is not set",
+      });
     }
 
-    const imageUrl = await generateImage(prompt);
+    const client = new OpenAI({ apiKey });
 
-    res.json({ imageUrl });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Image generation failed" });
+    const completion = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: req.body.messages,
+    });
+
+    res.json(completion);
+  } catch (err: any) {
+    res.status(500).json({
+      error: err.message || "OpenAI request failed",
+    });
   }
 });
 
