@@ -10,10 +10,14 @@
     "start": "NODE_ENV=production npx tsx index.ts"
   },
   "dependencies": {
+    "express": "^4.21.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.21.2",
+
     "express-session": "^1.17.3",
+    "connect-pg-simple": "^9.0.1",
+    "pg": "^8.11.5",
+
     "node-fetch": "^3.3.2",
     "openai": "^4.20.0"
   },
