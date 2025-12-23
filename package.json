@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=production npx tsx index.ts"
+"start": "NODE_ENV=production npx tsx index.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
