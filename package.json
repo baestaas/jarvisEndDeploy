@@ -1,21 +1,24 @@
 {
-  "name": "jarvoice",
+  "name": "jarvoice-backend",
   "version": "1.0.0",
-  "private": true,
   "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
-"start": "NODE_ENV=production npx tsx index.ts"
+    "start": "NODE_ENV=production npx tsx index.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "openai": "^4.0.0"
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.20.0"
   },
   "devDependencies": {
-    "tsx": "^4.7.0",
-    "typescript": "^5.4.5"
-  },
-  "engines": {
-    "node": ">=18"
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
   }
 }
+
